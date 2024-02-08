@@ -14,4 +14,7 @@ public class EdenParticles {
 	private static SimpleParticleType register(String name) {
 		return Registry.register(BuiltInRegistries.PARTICLE_TYPE, EdenRing.makeID(name), FabricParticleTypes.simple());
 	}
+
+	public static void ensureStaticallyLoadedServerside() {
+	}
 }

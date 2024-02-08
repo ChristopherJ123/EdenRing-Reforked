@@ -1,17 +1,6 @@
 package paulevs.edenring.blocks;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.betterx.bclib.client.models.BasePatterns;
-import org.betterx.bclib.client.models.ModelsHelper;
-import org.betterx.bclib.client.models.PatternsHelper;
-import org.betterx.bclib.interfaces.BlockModelProvider;
-
 import com.google.common.collect.Maps;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -32,6 +21,16 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import paulevs.edenring.registries.EdenBiomes;
 import paulevs.edenring.registries.EdenBlocks;
+
+import org.betterx.bclib.client.models.BasePatterns;
+import org.betterx.bclib.client.models.ModelsHelper;
+import org.betterx.bclib.client.models.PatternsHelper;
+import org.betterx.bclib.interfaces.BlockModelProvider;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class TexturedTerrainBlock extends GrassBlock implements BlockModelProvider {
 	public TexturedTerrainBlock() {
@@ -77,7 +76,7 @@ public class TexturedTerrainBlock extends GrassBlock implements BlockModelProvid
 	@Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         super.performBonemeal(serverLevel, randomSource, blockPos, blockState);
-		if (isValidBonemealTarget(serverLevel, blockPos, blockState, serverLevel.isClientSide)) {
+		if (isValidBonemealTarget(serverLevel, blockPos, blockState)) {
 			for (Direction direction : Direction.values()) {
 				Boolean spread = false;
 				BlockPos nearby = blockPos.relative(direction);
@@ -91,9 +90,4 @@ public class TexturedTerrainBlock extends GrassBlock implements BlockModelProvid
 			}
 		}
     }
-
-	private boolean isValidBonemealTarget(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState,
-			boolean isClientSide) {
-		throw new UnsupportedOperationException("Unimplemented method 'isValidBonemealTarget'");
-	}
 }

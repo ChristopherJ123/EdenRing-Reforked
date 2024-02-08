@@ -4,11 +4,9 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
-
-import org.betterx.bclib.complexmaterials.WoodenComplexMaterial;
 import paulevs.edenring.EdenRing;
 
-public class BrainTreeComplexMaterial extends WoodenComplexMaterial {
+public class BrainTreeComplexMaterial extends EdenWoodenComplexMaterial {
 	public BrainTreeComplexMaterial(String baseName) {
 		super(EdenRing.MOD_ID, baseName, "eden", MapColor.COLOR_LIGHT_GRAY, MapColor.COLOR_LIGHT_GRAY);
 	}

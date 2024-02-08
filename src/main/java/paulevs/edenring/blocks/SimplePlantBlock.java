@@ -1,8 +1,5 @@
 package paulevs.edenring.blocks;
 
-import org.betterx.bclib.behaviours.BehaviourBuilders;
-import org.betterx.bclib.blocks.BasePlantBlock;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
@@ -12,6 +9,9 @@ import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import org.betterx.bclib.behaviours.BehaviourBuilders;
+import org.betterx.bclib.blocks.BasePlantBlock;
 
 public class SimplePlantBlock extends BasePlantBlock {
 	private boolean isGrass;

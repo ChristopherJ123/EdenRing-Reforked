@@ -17,7 +17,7 @@ import org.betterx.bclib.api.v2.generator.BiomePicker;
 import org.betterx.bclib.api.v2.generator.map.hex.HexBiomeMap;
 import org.betterx.bclib.interfaces.BiomeMap;
 import paulevs.edenring.EdenRing;
-import paulevs.edenring.datagen.worldgen.EdenRingBiomesDataProvider;
+import paulevs.datagen.worldgen.EdenRingBiomesDataProvider;
 import paulevs.edenring.noise.InterpolationCell;
 import paulevs.edenring.world.biomes.EdenRingBiome;
 

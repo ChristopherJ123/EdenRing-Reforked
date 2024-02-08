@@ -26,4 +26,8 @@ public class EdenItems {
 		REGISTRY.register(EdenRing.makeID(name), item);
 		return item;
 	}
+
+	public static ItemRegistry getItemRegistry() {
+		return REGISTRY;
+	}
 }

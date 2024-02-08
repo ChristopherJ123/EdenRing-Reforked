@@ -1,12 +1,13 @@
 package paulevs.edenring.blocks;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import org.betterx.bclib.blocks.BaseLeavesBlock;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import paulevs.edenring.registries.EdenBlocks;
@@ -14,12 +15,6 @@ import paulevs.edenring.registries.EdenParticles;
 
 public class AuritisLeavesBlock extends BaseLeavesBlock {
 	
-	@Override
-	public Properties properties() {
-		// Auto-generated method stub
-		return super.properties();
-	}
-
 	public AuritisLeavesBlock() {
 		super(EdenBlocks.AURITIS_SAPLING, FabricBlockSettings.copyOf(Blocks.AZALEA_LEAVES).mapColor(MapColor.GOLD));
 	}

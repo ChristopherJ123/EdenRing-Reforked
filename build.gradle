@@ -2,10 +2,10 @@ buildscript {
     dependencies {
         classpath 'org.kohsuke:github-api:1.114'
     }
-	
-	repositories {
-		gradlePluginPortal()
-	}
+
+    repositories {
+        gradlePluginPortal()
+    }
 }
 
 plugins {
@@ -23,14 +23,44 @@ version = project.mod_version
 group = project.maven_group
 def local_bclib = findProject(':BCLib') != null
 
+loom {
+    interfaceInjection {
+        // When enabled injected interfaces from dependecies will be applied.
+        enableDependencyInterfaceInjection = true
+    }
+    runs {
+        // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
+        datagenClient {
+            inherit client
+            name "Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+            vmArg "-Dfabric-api.datagen.strict-validation"
+            vmArg "-Dfabric-api.datagen.modid=edenring"
+            runDir "build/datagen"
+        }
+    }
+}
+
+sourceSets {
+    main {
+        // Add the datagenned files into the jar.
+        resources {
+            srcDirs += [
+                    'src/main/generated'
+            ]
+        }
+    }
+}
+
 repositories {
     maven { url "https://maven.dblsaiko.net/" }
     maven { url "https://maven.fabricmc.net/" }
     maven { url 'https://maven.blamejared.com' }
     maven { url "https://maven.shedaniel.me/" }
     maven { url 'https://jitpack.io' }
-	maven { url 'https://maven.terraformersmc.com/releases' }
-	flatDir {
+    maven { url 'https://maven.terraformersmc.com/releases' }
+    flatDir {
         dirs 'libs'
     }
 }
@@ -44,9 +74,9 @@ dependencies {
     modImplementation "com.github.quiqueck:WunderLib:${project.wunderlib_version}"
     include "com.github.quiqueck:WunderLib:${project.wunderlib_version}"
 
-	
+
     println "Using local BCLib: ${local_bclib}"
-    if (local_bclib){		
+    if (local_bclib){
         implementation( project(path:":BCLib", configuration: 'dev') )
     } else {
         modImplementation "com.github.quiqueck:BCLib:${project.bclib_version}"
@@ -98,8 +128,8 @@ processResources {
     }
 
     filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
+        expand "version": project.version
+    }
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
@@ -107,12 +137,12 @@ processResources {
 // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
-	it.options.release = 17
+    it.options.release = 17
 }
 
 javadoc {
     options.tags = ["reason"]
-	options.stylesheetFile = new File(projectDir, "javadoc.css");
+    options.stylesheetFile = new File(projectDir, "javadoc.css");
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
@@ -121,10 +151,10 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
-	withSourcesJar()
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
+    withSourcesJar()
 }
 
 jar {

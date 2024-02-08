@@ -1,19 +1,6 @@
 package paulevs.edenring.blocks;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.betterx.bclib.client.models.ModelsHelper;
-import org.betterx.bclib.client.models.PatternsHelper;
-import org.betterx.bclib.client.render.BCLRenderLayer;
-import org.betterx.bclib.interfaces.BlockModelProvider;
-import org.betterx.bclib.interfaces.CustomColorProvider;
-import org.betterx.bclib.interfaces.RenderLayerProvider;
-
 import com.google.common.collect.Maps;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -38,6 +25,18 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import paulevs.edenring.registries.EdenBiomes;
 import paulevs.edenring.registries.EdenBlocks;
+
+import org.betterx.bclib.client.models.ModelsHelper;
+import org.betterx.bclib.client.models.PatternsHelper;
+import org.betterx.bclib.client.render.BCLRenderLayer;
+import org.betterx.bclib.interfaces.BlockModelProvider;
+import org.betterx.bclib.interfaces.CustomColorProvider;
+import org.betterx.bclib.interfaces.RenderLayerProvider;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class EdenGrassBlock extends GrassBlock implements BlockModelProvider, CustomColorProvider, RenderLayerProvider {
 	public EdenGrassBlock() {
@@ -102,7 +101,7 @@ public class EdenGrassBlock extends GrassBlock implements BlockModelProvider, Cu
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         super.performBonemeal(serverLevel, randomSource, blockPos, blockState);
-		if (isValidBonemealTarget(serverLevel, blockPos, blockState, serverLevel.isClientSide)) {
+		if (isValidBonemealTarget(serverLevel, blockPos, blockState)) {
 			for (Direction direction : Direction.values()) {
 				Boolean spread = false;
 				BlockPos nearby = blockPos.relative(direction);
@@ -116,9 +115,4 @@ public class EdenGrassBlock extends GrassBlock implements BlockModelProvider, Cu
 			}
 		}
     }
-
-	private boolean isValidBonemealTarget(ServerLevel serverLevel, BlockPos blockPos, BlockState blockState,
-			boolean isClientSide) {
-		throw new UnsupportedOperationException("Unimplemented method 'isValidBonemealTarget'");
-	}
 }
